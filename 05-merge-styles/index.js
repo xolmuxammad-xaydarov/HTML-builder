@@ -10,7 +10,7 @@ fs.readdir(stylesPath, {withFileTypes:true}, (err, fileNames) => {
   if (err) console.error(err.message);
   fileNames.forEach(fileName => {
     let fileExt = path.extname(fileName.name)
-    if (fileName.isFile() || fileExt === '.css') {
+    if (fileName.isFile() && fileExt === '.css') {
       const readStream = fs.createReadStream(path.join(stylesPath, fileName.name));
       readStream.on('data', data => writeStyles.write(data));
       readStream.on('error', error => console.error(error.message));
